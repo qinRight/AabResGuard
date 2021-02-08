@@ -29,6 +29,6 @@ open class AabResGuardExtension {
                 "\tfilterList=${if (filterList == null) null else filterList}" +
                 "\tenableFilterStrings=$enableFilterStrings\n" +
                 "\tunusedStringPath=$unusedStringPath\n" +
-                "\tlanguageWhiteoolean`List=${if (languageWhiteList == null) null else languageWhiteList}"
+                "\tlanguageWhiteList=${if (languageWhiteList == null) null else languageWhiteList}"
     }
 }
