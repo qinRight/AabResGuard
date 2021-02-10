@@ -27,6 +27,7 @@ buildscript {
         if ("true".equalsIgnoreCase(System.getProperty("enableAabResGuardPlugin", "false"))) {
             classpath deps.aabresguard.plugin
         }
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
