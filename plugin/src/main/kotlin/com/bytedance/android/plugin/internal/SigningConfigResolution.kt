@@ -82,7 +82,7 @@ private fun getBuildTypesForAGP4009(variantManager: VariantManager): Map<*, *>? 
 }
 
 
-private fun invokeSigningConfig(any: Any): SigningConfig {
+public fun invokeSigningConfig(any: Any): SigningConfig {
     val storeFile: File = any::class.java.getMethod("getStoreFile").invoke(any) as File
     val keyAlias: String = any::class.java.getMethod("getKeyAlias").invoke(any) as String
     val keyPassword: String = any::class.java.getMethod("getKeyPassword").invoke(any) as String

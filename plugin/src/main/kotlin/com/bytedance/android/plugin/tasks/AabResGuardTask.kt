@@ -1,10 +1,12 @@
 package com.bytedance.android.plugin.tasks
 
+import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.scope.VariantScope
 import com.bytedance.android.aabresguard.commands.ObfuscateBundleCommand
 import com.bytedance.android.plugin.extensions.AabResGuardExtension
 import com.bytedance.android.plugin.internal.getBundleFilePath
 import com.bytedance.android.plugin.internal.getSigningConfig
+import com.bytedance.android.plugin.internal.invokeSigningConfig
 import com.bytedance.android.plugin.model.SigningConfig
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -44,7 +46,11 @@ open class AabResGuardTask : DefaultTask() {
     private fun execute() {
         println(aabResGuard.toString())
         // init signing config
-        signingConfig = getSigningConfig(project, variantScope)
+//        signingConfig = getSigningConfig(project, variantScope)
+        val android = project.extensions.getByType(AppExtension::class.java)
+
+        signingConfig = invokeSigningConfig(android.signingConfigs.getByName("release"))//getSigningConfig(project, variantScope)
+
         printSignConfiguration()
 
         prepareUnusedFile()
