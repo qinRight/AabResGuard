@@ -66,8 +66,10 @@ open class AabResGuardTask : DefaultTask() {
                 .setRemoveStr(aabResGuard.enableFilterStrings)
                 .setUnusedStrPath(aabResGuard.unusedStringPath)
                 .setLanguageWhiteList(aabResGuard.languageWhiteList)
+        println("sign ObfuscateBundleCommand create")
         if (aabResGuard.mappingFile != null) {
             command.setMappingPath(aabResGuard.mappingFile)
+            println("sign ObfuscateBundleCommand setMappingPath")
         }
 
         if (signingConfig.storeFile != null && signingConfig.storeFile!!.exists()) {
@@ -75,8 +77,10 @@ open class AabResGuardTask : DefaultTask() {
                     .setKeyAlias(signingConfig.keyAlias)
                     .setKeyPassword(signingConfig.keyPassword)
                     .setStorePassword(signingConfig.storePassword)
+            println("sign ObfuscateBundleCommand setStoreFile")
         }
         command.build().execute()
+        println("sign ObfuscateBundleCommand execute")
     }
 
     private fun prepareUnusedFile() {
