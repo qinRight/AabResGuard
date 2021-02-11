@@ -56,42 +56,47 @@ open class AabResGuardTask : DefaultTask() {
         prepareUnusedFile()
 
         var countnum = 1
-        val command = ObfuscateBundleCommand.builder()
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setEnableObfuscate(aabResGuard.enableObfuscate)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setBundlePath(bundlePath)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setOutputPath(obfuscatedBundlePath)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setMergeDuplicatedResources(aabResGuard.mergeDuplicatedRes)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setWhiteList(aabResGuard.whiteList)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setFilterFile(aabResGuard.enableFilterFiles)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setFileFilterRules(aabResGuard.filterList)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setRemoveStr(aabResGuard.enableFilterStrings)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setUnusedStrPath(aabResGuard.unusedStringPath)
-        println("sign ObfuscateBundleCommand create ${countnum++}")
-        command.setLanguageWhiteList(aabResGuard.languageWhiteList)
-        println("sign ObfuscateBundleCommand create ${countnum}")
-        if (aabResGuard.mappingFile != null) {
-            command.setMappingPath(aabResGuard.mappingFile)
-            println("sign ObfuscateBundleCommand setMappingPath")
-        }
+        try {
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            val command = ObfuscateBundleCommand.builder()
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setEnableObfuscate(aabResGuard.enableObfuscate)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setBundlePath(bundlePath)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setOutputPath(obfuscatedBundlePath)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setMergeDuplicatedResources(aabResGuard.mergeDuplicatedRes)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setWhiteList(aabResGuard.whiteList)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setFilterFile(aabResGuard.enableFilterFiles)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setFileFilterRules(aabResGuard.filterList)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setRemoveStr(aabResGuard.enableFilterStrings)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setUnusedStrPath(aabResGuard.unusedStringPath)
+            println("sign ObfuscateBundleCommand create ${countnum++}")
+            command.setLanguageWhiteList(aabResGuard.languageWhiteList)
+            println("sign ObfuscateBundleCommand create ${countnum}")
+            if (aabResGuard.mappingFile != null) {
+                command.setMappingPath(aabResGuard.mappingFile)
+                println("sign ObfuscateBundleCommand setMappingPath")
+            }
 
-        if (signingConfig.storeFile != null && signingConfig.storeFile!!.exists()) {
-            command.setStoreFile(signingConfig.storeFile!!.toPath())
-            command.setKeyAlias(signingConfig.keyAlias)
-            command.setKeyPassword(signingConfig.keyPassword)
-            command.setStorePassword(signingConfig.storePassword)
-            println("sign ObfuscateBundleCommand setStoreFile")
+            if (signingConfig.storeFile != null && signingConfig.storeFile!!.exists()) {
+                command.setStoreFile(signingConfig.storeFile!!.toPath())
+                command.setKeyAlias(signingConfig.keyAlias)
+                command.setKeyPassword(signingConfig.keyPassword)
+                command.setStorePassword(signingConfig.storePassword)
+                println("sign ObfuscateBundleCommand setStoreFile")
+            }
+            command.build().execute()
+            println("sign ObfuscateBundleCommand execute")
+        }catch (e:Throwable){
+            println("sign ObfuscateBundleCommand ${e.message}")
         }
-        command.build().execute()
-        println("sign ObfuscateBundleCommand execute")
     }
 
     private fun prepareUnusedFile() {
