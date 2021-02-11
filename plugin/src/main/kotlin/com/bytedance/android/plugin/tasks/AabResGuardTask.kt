@@ -95,7 +95,8 @@ open class AabResGuardTask : DefaultTask() {
             command.build().execute()
             println("sign ObfuscateBundleCommand execute")
         }catch (e:Throwable){
-            println("sign ObfuscateBundleCommand ${e.message}")
+            e.printStackTrace()
+            println("sign ObfuscateBundleCommand ${e.toString()}")
         }
     }
 
